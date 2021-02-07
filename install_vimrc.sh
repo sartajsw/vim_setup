@@ -20,12 +20,16 @@ wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20R
 wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
 wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
 wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
-cp MesloLGS* ~/.local/share/fonts
+sudo cp MesloLGS* ~/.local/share/fonts
 rm MesloLGS*
 
 # Copy vim configuration file to the home path
 echo "Copying configuration file"
 cp vimrc ~/.vimrc
+
+# Run Plug Install
+echo "Running PlugInstall"
+vim +PlugInstall +qall
 
 # Finish
 echo "Setup complete!"
