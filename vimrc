@@ -21,8 +21,9 @@ set undofile
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
@@ -56,12 +57,47 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
-" enable powerline fonts for vim-airline
-let g:airline_powerline_fonts = 1
+" Airline
+"let g:airline_powerline_fonts = 1
 "let g:airline_left_sep = ''
 "let g:airline_right_sep = ''
-" Switch to your current theme
 "let g:airline_theme = 'nord'
+
+" Lightline
+set laststatus=2
+
+let g:lightline = {
+    \ 'colorscheme': 'nord',
+    \ 'component_function': {
+    \   'filetype': 'MyFiletype',
+    \   'fileformat': 'MyFileformat',
+    \   'lineinfo': 'MyLineinfo',
+    \ }
+    \ }
+
+function! MyLineinfo() abort
+    if (winwidth(0) < 70)
+        return ''
+    endif
+
+  return line('.') . '/' . line('$')
+endfunction
+
+function! MyFiletype()
+    if (winwidth(0) < 70)
+        return ''
+    endif
+    
+    return (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft')
+endfunction
+
+function! MyFileformat()
+    if winwidth(0) < 70
+        return ''
+    endif
+
+    return (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol())
+endfunction
 
 " We don't need to see things like -- INSERT -- anymore
 set noshowmode
