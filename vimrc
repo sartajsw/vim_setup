@@ -33,12 +33,14 @@ Plug 'pangloss/vim-javascript'
 Plug 'morhetz/gruvbox'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'arcticicestudio/nord-vim'
+Plug 'joshdick/onedark.vim' 
 
 call plug#end()
 
 "colorscheme dracula
 "colorscheme nord
-colorscheme gruvbox
+"colorscheme gruvbox
+colorscheme onedark 
 set background=dark
 
 " Customize fzf colors to match your color scheme
@@ -67,14 +69,15 @@ let g:fzf_colors =
 set laststatus=2
 
 let g:lightline = {
-    \ 'colorscheme': 'gruvbox',
+    \ 'colorscheme': 'onedark',
     \ 'component_function': {
     \   'filetype': 'MyFiletype',
     \   'fileformat': 'MyFileformat',
     \   'lineinfo': 'MyLineinfo',
+    \ },
+    \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+    \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
     \ }
-    \ }
-
 function! MyLineinfo() abort
     if (winwidth(0) < 70)
         return ''
@@ -156,7 +159,3 @@ nmap gp :tabp<cr>
 nmap <Esc>c :tabclose<cr>
 " Always show tabs
 "set showtabline=2
-
-" For python files
-nmap <F6> :! python % <cr>
-nmap <F5> :! clear; python % <cr>
